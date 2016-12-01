@@ -157,418 +157,75 @@ class: center, middle, inverse
 
 ## Content
 
-* Design Goals
+* Dynamic Routing Protocols
 
-* Design Solutions
+  * BGP
 
----
+  * OSPF
 
-background-image: url(kadse1.jpg)
+* Logical Network Design
+
+  * Switched
+
+  * Static Routed
+
+  * Dynamic Routed
 
 ---
 
 .left-column[
-## Design Goals
+## Dynamic Routing
 ]
 
 .right-column[
 
-* Focus on a few topics
+* Why?
 
-* Can't implement all goals at 100%
 ]
 
 ---
-
 .left-column[
-## Design Goals
-### Costs
+## Dynamic Routing
 ]
 
 .right-column[
 
-* Many small + cheap devices?
+* Handle failover
 
-* A few big + expensive devices?
+* Discover remote networks
 
-* License costs?
+* Choose the best path to the destination
 
-* Cabling?
+* Lower configuration costs
+
+* Lower failure points?
 
 ]
 
 ---
 
 .left-column[
-## Design Goals
-### Costs
-### Scaling
-]
-
-
-.right-column[
-
-* Expected growth?
-
-  * Amount of new clients?
-
-  * Amount of new servers?
-
-  * Expected amout of ingress/egress traffic?
-]
-
----
-
-.left-column[
-## Design Goals
-### Costs
-### Scaling
-### Redundancy
+## Dynamic Routing
+### BGP
 ]
 
 .right-column[
 
-* On which paths do I really need redundancy?
+* Distance Vector Routing Protocol
 
-  * Costs of redundancy vs outage?
+  * what?
 
-  * Don't abuse redundant rings, stay under 50% utilization!
-
-  * Logical redundancy? Physical Redundancy?
-
-* Redundancy needs more configuration than a simple link
-
-* Redundancy needs proper metrics and monitoring
-
-]
-
----
-
-class: middle, center, inverse
-## Topology
-
----
-
-background-image: url(internet_simple.svg)
-
----
-
-background-image: url(internet_simple_complete.svg)
-
----
-
-background-image: url(internet_complete_AS.svg)
-
----
-
-background-image: url(kadse2_cropped.jpg)
-
----
-
-.left-column[
-## Design Solutions
-]
-
-.right-column[
-
-* How to design the network edge?
-
-* Design the core?
-
-* Design the Datacenter/TOR?
-
-  * TOR - Top of Rack switche
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-]
-
-.right-column[
-
-* Redundancy
-
-* Control over routing
-
-* More bandwidth
-
-* Reach more clients all over the world
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-]
-
-.left-column[
-
-![Right-aligned image](basic_as.svg)
-
-]
-
----
-
-background-image: url(decix_router.png)
-
----
-
-background-image: url(decix_traffic_cropped.png)
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-]
-
-.right-column[
-
-![Right-aligned image](network_edge_1.svg)
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-]
-
-.right-column[
-
-![Right-aligned image](network_edge_2.svg)
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-]
-
-.right-column[
-
-![Right-aligned image](network_edge_3.svg)
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-]
-
-.right-column[
-
-![Right-aligned image](network_edge_4.svg)
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-]
-
-.right-column[
-
-* Always use two core routers for redundancy at a POP
-
-  * POP  - Point of Presence
-
-* Always use a seperate router for transit/peering
-
-* BGP as EGP
-
-  * Border Gateway Protocol
+* BGP
 
   * Exterior Gateway Protocol
-]
 
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-### Core
-]
-
-.right-column[
-
-![Right-aligned image](network_edge_5.svg)
+  * To communicate between multiple AS
 
 ]
 
 ---
 
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-### Core
-]
 
-.right-column[
-
-![Right-aligned image](network_edge_6.svg)
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-### Core
-]
-
-.right-column[
-
-![Right-aligned image](network_edge_7.svg)
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-### Core
-]
-
-.right-column[
-
-![Right-aligned image](network_edge_8.svg)
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-### Core
-]
-
-.right-column[
-
-* Most important part of the network, don't make mistakes!
-
-* Precisely monitor traffic amount + flow
-
-* build many small and redundant rings
-
-* Invest in huge capacities, upgrades are painful
-
-* Automate it
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-### Core
-### DC
-]
-
-.right-column[
-
-![Right-aligned image](DC_1.svg)
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-### Core
-### DC
-]
-
-.right-column[
-
-* Scales until the access router runs out of ports
-
-* Router ports are expensive
-
-* No redundant connection for TOR
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-### Core
-### DC
-]
-
-.right-column[
-
-![Right-aligned image](DC_2.svg)
-
-]
-
----
-
-.left-column[
-## Design Solutions
-### Why?
-### Topology
-### Edge
-### Core
-### DC
-]
-
-.right-column[
-
-* Redundant
-
-* Scales for vertical traffic
-
-* Big clusters require more and more horizontal traffic
-
-]
 
     </textarea>
     <script src="remark-latest.min.js"></script>
