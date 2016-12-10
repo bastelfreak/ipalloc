@@ -213,6 +213,10 @@ class: center, middle, inverse
 
 ![Right-aligned image](igp_egp.svg)
 
+* IGP = Interior Gateway Protocol
+
+* EGP = Exterior Gateway Protocol
+
 ]
 
 ---
@@ -220,6 +224,102 @@ class: center, middle, inverse
 .left-column[
 ## Dynamic Routing
 ### BGP
+]
+
+.right-column[
+
+* Distance Vector Routing Protocol
+
+* EGP
+
+* Aggregates all vectors to the most simple one
+
+* Pushes updates based on events
+
+* Only talks to direct peers
+
+* Prevents routing loops by checking the AS-Path
+]
+
+---
+
+.left-column[
+## Dynamic Routing
+### BGP
+
+]
+
+.right-column[
+
+![Right-aligned image](distance-vector-simple.svg)
+
+    Element | Vector
+    ------- | ----------------------------
+    AS24940 | AS3320
+    AS24940 | AS3320 -> AS20773 -> AS13335
+    AS24940 | AS3320 -> AS20773 -> AS1299
+    AS24940 | AS1299
+    AS24940 | AS1299 -> AS13335
+]
+
+---
+
+.left-column[
+## Dynamic Routing
+### BGP
+
+]
+
+.right-column[
+
+![Right-aligned image](distance-vector-real-ipv4.png)
+
+.footnote[&copy; http://bgp.he.net/AS24940#_asinfo]
+
+]
+
+---
+
+.left-column[
+## Dynamic Routing
+### BGP
+
+]
+
+.right-column[
+
+![Right-aligned image](distance-vector-real-ipv6.png)
+
+.footnote[&copy; http://bgp.he.net/AS24940#_asinfo]
+
+]
+
+---
+
+.left-column[
+## Dynamic Routing
+### BGP
+
+]
+
+.right-column[
+
+Route Selection
+
+* Ignores Link-State
+
+* Ignores Hop Count
+
+* Honors AS-Path
+
+* Honors propritary values
+]
+---
+
+.left-column[
+## Dynamic Routing
+### BGP
+### OSPF
 ]
 
 .right-column[
@@ -237,7 +337,6 @@ class: center, middle, inverse
 ]
 
 ---
-
 .left-column[
 ## Conclusion
 ]
