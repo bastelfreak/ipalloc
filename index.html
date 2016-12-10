@@ -167,9 +167,9 @@ class: center, middle, inverse
 
   * Switched
 
-  * Static Routed
+  * Statically Routed
 
-  * Dynamic Routed
+  * Dynamically Routed
 
 ---
 
@@ -241,6 +241,8 @@ class: center, middle, inverse
 * Only talks to direct peers
 
 * Prevents routing loops by checking the AS-Path
+
+* Announces the configured routing table
 ]
 
 ---
@@ -278,7 +280,7 @@ class: center, middle, inverse
 
 ![Right-aligned image](distance-vector-real-ipv4.png)
 
-.footnote[&copy; http://bgp.he.net/AS24940#_asinfo]
+.footnote[&copy; http://bgp.he.net/AS24941#_asinfo]
 
 ]
 
@@ -413,9 +415,155 @@ Link-state routing
 
 ---
 
+.left-column[
+##Logical Network Design
+### Switched
+]
 
+.right-column[
 
+* Many SPOF, unable to mesh
 
+  * would create loops
+
+* CAM table size is limited
+
+  * Content Addressable Memory = MAC table
+
+* All switches hold up all MAC addresses in the same Layer2/VLAN
+
+  * limit is around ~512-4096 addresses per device
+
+  * Juniper EX2200-48T: 16.000 entries, 864€
+
+  * Juniper EX3200-48T (EOL): 32.000 entries, 1975€
+
+  * TP-Link T3700G-28TQ: 32.000 entries, 1698€
+
+  * Netgear GS724Tv4: 16.000 entries, 150€
+]
+
+---
+
+.left-column[
+##Logical Network Design
+### Switched
+### Statically Routed
+]
+
+.right-column[
+
+![Right-aligned image](routed_1.svg)
+
+* One Subnet for each switch
+
+]
+
+---
+
+.left-column[
+##Logical Network Design
+### Switched
+### Statically Routed
+]
+
+.right-column[
+
+* Static routes configured on all switches
+
+* Works fine on Layer 2 until there are VLANs across routers
+
+  * CAM tables will again be too big
+
+* Requires manual configuration for routes
+
+* Redundant ring
+
+]
+
+---
+
+.left-column[
+##Logical Network Design
+### Switched
+### Statically Routed
+### Dynamically Routed
+]
+
+.right-column[
+
+* Less stuff to configure by hand
+
+* Better failover for new links
+
+* TOR switch for hypervisors is still a bottleneck
+
+* We could use OSPF or RIP
+
+]
+
+---
+
+background-image: url(dog.jpg)
+
+---
+
+background-image: url(scaling.jpg)
+
+---
+
+.left-column[
+##Logical Network Design
+### Switched
+### Statically Routed
+### Dynamically Routed
+]
+
+.right-column[
+
+![Right-aligned image](routed_2.svg)
+
+]
+
+---
+
+.left-column[
+##Logical Network Design
+### Switched
+### Statically Routed
+### Dynamically Routed
+]
+
+.right-column[
+
+![Right-aligned image](cisco-leaf-spine.png)
+
+]
+
+---
+.left-column[
+##Logical Network Design
+### Switched
+### Statically Routed
+### Dynamically Routed
+]
+
+.right-column[
+
+BGP as IGP
+
+* Bad: Every router would talk to every other router
+
+  * Fine for small networks, otherwise requires a workaround
+
+* Bad: Needs something to get the routing table
+
+  * " Announces the configured routing table" - Slide 7
+
+* Nice: Simple Table of: Sourcenet -> Next Hop
+]
+
+---
 .left-column[
 ## Conclusion
 ]
