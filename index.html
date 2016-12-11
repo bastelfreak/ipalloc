@@ -508,7 +508,18 @@ background-image: url(dog.jpg)
 
 ---
 
-background-image: url(scaling.jpg)
+.left-column[
+##Logical Network Design
+### Switched
+### Statically Routed
+### Dynamically Routed
+]
+
+.right-column[
+
+![Right-aligned image](scaling.jpg)
+
+]
 
 ---
 
@@ -538,9 +549,58 @@ background-image: url(scaling.jpg)
 
 ![Right-aligned image](cisco-leaf-spine.png)
 
+* 16 Racks
+
+* 16 Switches
+
+* 8 Routers
+
+* 16*40 = 640 Servers
+
+* 640 * 100 = 64.000 Virtual Machines
 ]
 
 ---
+
+.left-column[
+##Logical Network Design
+### Switched
+### Statically Routed
+### Dynamically Routed
+]
+
+.right-column[
+
+* Impossible to have 64.000 Virtual Machines + Hypervisors in the same Layer 2
+
+  * Would require switches with 64,000 MAC entries
+
+  * Juniper EX92008, 8RU, ~45.000€, per rack
+
+* Dynamic routing protocols route prefixes to a next hop
+
+* Normally used to route nets to a router
+
+* You can route to any IP address?
+]
+
+---
+
+.left-column[
+##Logical Network Design
+### Switched
+### Statically Routed
+### Dynamically Routed
+]
+
+.right-column[
+
+![Right-aligned image](wat.jpg)
+
+]
+
+---
+
 .left-column[
 ##Logical Network Design
 ### Switched
@@ -552,24 +612,58 @@ background-image: url(scaling.jpg)
 
 BGP as IGP
 
-* Bad: Every router would talk to every other router
+* Bad: Every router would talk to every other router (fully meshed)
 
-  * Fine for small networks, otherwise requires a workaround
+  * Fine for small networks, doesn't work in this size
+
+  * Each hypervisor will act as a router
 
 * Bad: Needs something to get the routing table
 
-  * " Announces the configured routing table" - Slide 7
+  * "Announces the configured routing table" - Slide 7
 
 * Nice: Simple Table of: Sourcenet -> Next Hop
+
 ]
 
 ---
+
+.left-column[
+##Logical Network Design
+### Switched
+### Statically Routed
+### Dynamically Routed
+]
+
+.right-column[
+
+BGP route reflector
+
+![Right-aligned image](routed_3.svg)
+
+* Everybody sends updates to a central router
+
+* Router pushes updates to all routers that need this information
+
+]
+
+---
+
 .left-column[
 ## Conclusion
 ]
 
 .right-column[
 
+* Dynamic routing is fun
+
+* OSPF is fine for announcing hypervisor networks
+
+* BGP is perfect for cloud
+
+* Don't trust vendors for CAM table size
+
+.footnote[&copy; Tim 'bastelfreak' Meusel]
 ]
 
     </textarea>
